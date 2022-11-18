@@ -8,7 +8,7 @@ data = pd.read_csv("InfiniumOmni2-5-8_LocusReport.txt",sep="\t")
 data = data.loc[data['Chr'] == '20']
 data.loc[data['Call Freq'] > 0.999999, 'Call Freq'] = 1-epsilon
 
-pos = pd.read_csv("Pos.txt")
+pos = pd.read_csv("Pos_imp.txt")
 pos = list(pos.iloc[:,0])
 dpos = list(data['Position'])
 
