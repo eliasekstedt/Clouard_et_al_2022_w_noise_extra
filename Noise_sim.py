@@ -7,7 +7,7 @@ def _add_noise(self,enc_mat):
     if pos in pos_illumina:
         for i in enc_mat:
             for j in i:
-                if t >= float(data_illumina.loc[data_illumina['Position'] == pos, 'Call Freq']):
+                if t >= data_illumina.loc[data_illumina['Position'] == pos, 'Call Freq']:
                     print('Add Noise')
                     if j[0] == 0 and j[1] == 0:
                         print('before',j)
