@@ -38,15 +38,31 @@ print('No of markers in Clouard et al. 2022 dataset: ',len(kgp_chr20_list))
 print('No of markers intersecting (Locus Report - Clouard et al. 2022):', len(intersecting))
 print('No of markers intersecting (Locus Report - subset):', len(intersecting_subset))
 
+
 # Creating dataframe of positions and call frequencies,
-# where markers not found in the locus rapport are given Call Freq = 1 - epsilon
-call_freq_list = [['Pos', 'Call_Freq']]
+# where markers not found in the locus rapport are given Call Freq = (1 - epsilon)
+call_freq_list = []
 for position_kgp in kgp_chr20_list:
-    if position_kgp in intersecting:
-        call_freq_list.append([position_kgp, locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq']])
+    if position_kgp in intersecting.values.tolist():
+        call_freq_list.append([int(position_kgp), locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq'].tolist()[0]])
     else:
-        call_freq_list.append([position_kgp, float(1-epsilon)])
-call_freq = pd.DataFrame(call_freq_list[1:], columns=call_freq_list[0])
+        call_freq_list.append([int(position_kgp), float(1-epsilon)])
+#print(call_freq_list)
+call_freq = pd.DataFrame(call_freq_list[1:])
+
+# Creating dataframe of positions and call frequencies for the subset,
+# where markers not found in the locus rapport are given Call Freq = (1 - epsilon)
+call_freq_subset_list = []
+for position_kgp in kgp_chr20_subset_list:
+    if position_kgp in intersecting_subset.values.tolist():
+        call_freq_subset_list.append([int(position_kgp), locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq'].tolist()[0]])
+    else:
+        call_freq_subset_list.append([int(position_kgp), float(1-epsilon)])
+#print(call_freq_list)
+call_freq_subset = pd.DataFrame(call_freq_subset_list[1:])
+
 
 # Converting dataframe of positions and call frequencies to csv file
 call_freq.to_csv('Call_Freq_Clouard_2022.csv')
+call_freq_subset.to_csv('Call_Freq_subset_Clouard_2022.csv')
+
