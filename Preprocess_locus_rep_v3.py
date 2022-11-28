@@ -11,6 +11,7 @@ epsilon = 1*10**-3
 # Reading in the Locus Report for Infinium Omni 2-5-8 and extracting chr20, and the appropriate fields
 locus_data = pd.read_csv("InfiniumOmni2-5-8v1-5_A1_LocusReport.txt", sep="\t", index_col=[0], low_memory=False)
 locus_data = locus_data.loc[locus_data['Chr'] == '20']
+print(len(locus_data))
 locus_data = locus_data.drop(['Name', 'Chr', 'AA Freq', 'AB Freq', 'BB Freq', 'Minor Freq'], axis=1)
 locus_data.loc[locus_data['Call Freq'] > 0.999999, 'Call Freq'] = 1-epsilon
 locus_data_list = list(locus_data['Position'])

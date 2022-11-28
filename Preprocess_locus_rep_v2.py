@@ -9,16 +9,18 @@ data = data.loc[data['Chr'] == '20']
 data = data.drop(['Index', 'AA Freq', 'AB Freq', 'BB Freq', 'Minor Freq'], axis=1)
 data.loc[data['Call Freq'] > 0.999999, 'Call Freq'] = 1-epsilon
 
-pos = pd.read_csv("Pos_imp_big.txt")
+pos = pd.read_csv("pos_imp_big.txt")
 pos = list(pos.iloc[:,0])
+# dpos = pd.read_csv("pos_ref_big.txt")
+# dpos = list(dpos.iloc[:,0])
 dpos = list(data['Position'])
 
-intersecting = set(pos).intersection(dpos)
+intersecting = pd.Series(list(set(pos) & set(dpos)))
 print('No of records intersecting:',len(intersecting))
-print('No of records in Illumina Data: ',len(dpos))
-print('No of records in Carl Data: ',len(pos))
+print('No of records in Illumina data: ',len(dpos))
+print('No of records in IMP Data: ',len(pos))
 
 chr20_filtered = data.query('Position in @intersecting')
-# chr20_filtered['Position'] = chr20_filtered['Position'].astype(float)
+chr20_filtered['Position'] = chr20_filtered['Position'].astype(float)
 chr20_filtered['Position'] = chr20_filtered['Position']
 to_write = chr20_filtered.to_csv('InfiniumOmni2-5-8_Chr_20.txt',float_format='{:f}'.format,sep='\t', index=False, header=True)

@@ -1,3 +1,5 @@
-import numpy as np
-test = np.array([[0,0,0]]*16)
-print(test)
+import pandas as pd
+
+call_freq_data = pd.read_csv("Call_Freq_subset_Clouard_2022.csv")
+
+print(call_freq_data)
