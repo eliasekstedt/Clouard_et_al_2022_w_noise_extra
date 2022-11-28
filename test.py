@@ -1,5 +1,9 @@
+import io
+import os
 import pandas as pd
+import vcf
 
-call_freq_data = pd.read_csv("Call_Freq_subset_Clouard_2022.csv")
+vcf_reader = vcf.Reader(open('data/Big_data/Clouard_2022.vcf', 'r'))
 
-print(call_freq_data)
+for record in vcf_reader:
+    print(record)

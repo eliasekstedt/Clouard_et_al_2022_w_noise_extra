@@ -9,7 +9,7 @@ random.seed(10)
 epsilon = 1*10**-3
 
 # Reading in the Locus Report for Infinium Omni 2-5-8 and extracting chr20, and the appropriate fields
-locus_data = pd.read_csv("InfiniumOmni2-5-8v1-5_A1_LocusReport.txt", sep="\t", index_col=[0], low_memory=False)
+locus_data = pd.read_csv("data/InfiniumOmni2-5-8v1-5_A1_LocusReport.txt", sep="\t", index_col=[0], low_memory=False)
 locus_data = locus_data.loc[locus_data['Chr'] == '20']
 print(len(locus_data))
 locus_data = locus_data.drop(['Name', 'Chr', 'AA Freq', 'AB Freq', 'BB Freq', 'Minor Freq'], axis=1)
@@ -17,7 +17,7 @@ locus_data.loc[locus_data['Call Freq'] > 0.999999, 'Call Freq'] = 1-epsilon
 locus_data_list = list(locus_data['Position'])
 
 # Reading in the positions of the markers in dataset utilized in Clouard et al. 2022
-kgp_chr20 = pd.read_csv("kgp_chr20_pos.txt")
+kgp_chr20 = pd.read_csv("data/kgp_chr20_pos.txt")
 kgp_chr20_list = list(kgp_chr20.iloc[:, 0])
 
 # Creating a subset of 1000 markers for testing
@@ -64,6 +64,6 @@ call_freq_subset = pd.DataFrame(call_freq_subset_list[1:])
 
 
 # Converting dataframe of positions and call frequencies to csv file
-call_freq.to_csv('Call_Freq_Clouard_2022.csv')
-call_freq_subset.to_csv('Call_Freq_subset_Clouard_2022.csv')
+call_freq.to_csv('Call_Freq_Clouard_2022.txt', sep='\t', header=True)
+call_freq_subset.to_csv('Call_Freq_subset_Clouard_2022.txt', sep='\t', header=True)
 
