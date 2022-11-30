@@ -3,7 +3,9 @@ import os
 import pandas as pd
 import vcf
 
-vcf_reader = vcf.Reader(open('data/Big_data/Clouard_2022.vcf', 'r'))
+j = 0
+for i in range(1000):
+    j += 1
 
-for record in vcf_reader:
-    print(record)
+
+print(j)
