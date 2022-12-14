@@ -48,7 +48,6 @@ for position_kgp in kgp_chr20_list:
         call_freq_list.append([int(position_kgp), locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq'].tolist()[0]])
     else:
         call_freq_list.append([int(position_kgp), float(1-epsilon)])
-#print(call_freq_list)
 call_freq = pd.DataFrame(call_freq_list[1:])
 
 # Creating dataframe of positions and call frequencies for the subset,
@@ -59,7 +58,6 @@ for position_kgp in kgp_chr20_subset_list:
         call_freq_subset_list.append([int(position_kgp), locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq'].tolist()[0]])
     else:
         call_freq_subset_list.append([int(position_kgp), float(1-epsilon)])
-#print(call_freq_list)
 call_freq_subset = pd.DataFrame(call_freq_subset_list[1:])
 
 
