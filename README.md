@@ -1,7 +1,7 @@
-# Project Applied Bioinformatics 2022
+# Project Applied Bioinformatics 2022 - Scripts and outputs
 **Elias Ekstedt, Philip MacCormack & Klara Solander**
 
-This project is based on the work by Clouard *et al.* 2022, in their work can be found in the following [GitHub repository](https://github.com/camcl/genotypooler).
+This project is based on the work by Clouard *et al.* 2022, their proposed simulation can be found in the following [GitHub repository](https://github.com/camcl/genotypooler), and their imputation algorithm *Prophaser* can be found in the following [GitHub repository](https://github.com/kausmees/prophaser).
 
 ## Scripts
 This folder contains the preprocessing scripts created during the project. 
