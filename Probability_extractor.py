@@ -3,9 +3,9 @@ import xlsxwriter
 
 probs = {}
 
-vcf_reader = vcf.Reader(open('data/Result_files/Clouard_2022_noise/IMP.chr20.pooled.imputed.vcf', 'r'))
+vcf_reader = vcf.Reader(open('data/Result_files/Prophaser_1_sample/HG03311.IMP.chr20.pooled.snps.gl.full.postgenos.vcf', 'r')) # Change input file if needed
 
-workbook = xlsxwriter.Workbook('imputation_probabilities.xlsx')
+workbook = xlsxwriter.Workbook('data/Result_files/Prophaser_1_sample/imputation_probabilities.xlsx') # Change output folder if needed
 worksheet = workbook.add_worksheet()
 row = 0
 column = 1
