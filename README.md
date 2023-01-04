@@ -26,7 +26,7 @@ These are the data files created when running Preprocess_locus_rep_v3.py on the 
 The dataset utilized in Clouard *et al.* 2022.
 
 #### kgp_chr20_pos.txt
-A file containing only the marker positions, which is utilized in Preprocess_locus_rep_v3.py. This is file was created manually by extracting the positions from Clouard_2022.vcf.gz, with the purpose of saving computational time as this file is large and therefore takes time to load and read through. 
+A file containing only the marker positions, which is utilized in Preprocess_locus_rep_v3.py. This file was created manually by extracting the positions from Clouard_2022.vcf.gz, with the purpose of saving computational time as this file is large and therefore takes time to load and read through. 
 
 ### Results
 
