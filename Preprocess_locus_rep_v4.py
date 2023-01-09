@@ -11,7 +11,7 @@ epsilon = 1*10**-3
 # Reading in the Locus Report for Infinium Omni 2-5-8 and extracting chr20, and the appropriate fields
 locus_data = pd.read_csv("InfiniumOmni2-5-8v1-5_A1_LocusReport.txt", sep="\t", index_col=[0], low_memory=False)
 locus_data = locus_data.loc[locus_data['Chr'] == '20']
-locus_data = locus_data.drop(['Name', 'Chr', 'AA Freq', 'AB Freq', 'BB Freq', 'Minor Freq'], axis=1)
+locus_data = locus_data.drop(['Name', 'Chr', 'AA Freq', 'AB Freq', 'BB Freq'], axis=1)
 locus_data.loc[locus_data['Call Freq'] > 0.999999, 'Call Freq'] = 1-epsilon
 locus_data_list = list(locus_data['Position'])
 
@@ -43,10 +43,10 @@ print('No of markers intersecting (Locus Report - subset):', len(intersecting_su
 call_freq_list = [['Position', 'Call_Freq', 'Minor_Freq']]
 for position_kgp in kgp_chr20_list:
     if position_kgp in intersecting.values.tolist():
-        call_freq_list.append([int(position_kgp), locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq'].tolist()[0]])
+        call_freq_list.append([int(position_kgp), locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq'].tolist()[0], locus_data.loc[locus_data['Position'] == position_kgp, 'Minor Freq'].tolist()[0]])
     else:
-        call_freq_list.append([int(position_kgp), float(1-epsilon)])
-call_freq = pd.DataFrame(call_freq_list[1:], columns=['Pos', 'Call_Freq'])
+        call_freq_list.append([int(position_kgp), float(1-epsilon), int(0)])
+call_freq = pd.DataFrame(call_freq_list[1:], columns=['Pos', 'Call_Freq', 'Minor_Freq'])
 # print(call_freq)
 
 # Creating dataframe of positions and call frequencies for the subset,
@@ -54,11 +54,11 @@ call_freq = pd.DataFrame(call_freq_list[1:], columns=['Pos', 'Call_Freq'])
 call_freq_subset_list = [['Position', 'Call_Freq', 'Minor_Freq']]
 for position_kgp in kgp_chr20_subset_list:
     if position_kgp in intersecting_subset.values.tolist():
-        call_freq_subset_list.append([int(position_kgp), locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq'].tolist()[0]])
+        call_freq_subset_list.append([int(position_kgp), locus_data.loc[locus_data['Position'] == position_kgp, 'Call Freq'].tolist()[0], locus_data.loc[locus_data['Position'] == position_kgp, 'Minor Freq'].tolist()[0]])
     else:
-        call_freq_subset_list.append([int(position_kgp), float(1-epsilon)])
+        call_freq_subset_list.append([int(position_kgp), float(1-epsilon), int(0)])
 
-call_freq_subset = pd.DataFrame(call_freq_subset_list[1:], columns=['Pos', 'Call_Freq'])
+call_freq_subset = pd.DataFrame(call_freq_subset_list[1:], columns=['Pos', 'Call_Freq', 'Minor_Freq'])
 
 # Converting dataframe of positions and call frequencies to csv file
 call_freq[1:].to_csv('Call_Freq_Clouard_2022.csv')
